@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: custom1;
+  src: url("./asserts/OnelySans-BF64ca37de58364.otf");
+}
+@font-face {
+  font-family: custom2;
+  src: url("./asserts/Sporting-ZVDo8.ttf");
+}
+@font-face {
+  font-family: custom3;
+  src: url("./asserts/Widemon-Rpmyl.otf");
+}
+@font-face {
+  font-family: custom4;
+  src: url("./asserts/ff1.otf");
+}
+@font-face {
+  font-family: custom5;
+  src: url("./asserts/romero-bold.otf");
+}
+@font-face {
+  font-family: custom6;
+  src: url("./asserts/ff4.ttf");
+}
+
+@font-face {
+  font-family: custom7;
+  src: url("./asserts/ff5.ttf");
+}
