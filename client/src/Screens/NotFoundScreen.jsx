@@ -1,8 +1,13 @@
 import NavBar from "../Components/NavBar";
 import Lottie from "lottie-react";
 import Animation1 from "../Asserts/404Anime.json";
+import { useEffect } from "react";
+// import[useEffect]
 
 const NotFoundScreen = () => {
+  useEffect(() => {
+    document.title = "Dwrite | Not Found";
+  });
   return (
     <>
       <div className="bg-gray-900 min-h-screen overflow-hidden">

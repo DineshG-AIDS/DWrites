@@ -4,8 +4,12 @@ import Lottie from "lottie-react";
 import Animations2 from "../Asserts/Animation12.json";
 import HeaderText from "../Components/HeaderText";
 import { motion as m } from "framer-motion";
+import { useEffect } from "react";
 
 const HomeScreens = () => {
+  useEffect(() => {
+    document.title = "Dwrite";
+  });
   return (
     <div className="bg-gray-900 min-h-screen overflow-hidden">
       <NavBar />

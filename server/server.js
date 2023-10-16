@@ -1,18 +1,30 @@
 const express = require("express");
 const mongoose = require("mongoose");
+///////////////////////
 const cors = require("cors");
 const bcrypt = require("bcrypt");
+//////////////////////////////////////////////////////
+
 const UserModel = require("./Models/UserModel");
 const UserGoogleModel = require("./Models/UserGoogleModel");
+const PostModel = require("./Models/PostModel");
+const fileUpload = require("express-fileupload");
+
+/////////////////////////////////////////////
 const CoookieParser = require("cookie-parser");
 const buddy_jwt = require("jsonwebtoken");
+const multer = require("multer");
+const fs = require("fs");
 
 ///////////////////////////
 const app = express();
 ////////////////////////////
 
 require("dotenv").config();
+//////////////////////////////////
+const uploadMiddleWare = multer({ dest: "uploads/" });
 
+////////////////////////////////////////
 // const saltRounds = 8;
 
 app.use(express.json());
@@ -162,13 +174,78 @@ app.get("/user", (req, res) => {
 app.post("/logout", (req, res) => {
   res
     .cookie("token", "", {
-      expires: new Date(0), 
-      httpOnly: true, 
+      expires: new Date(0),
+      httpOnly: true,
     })
     .json("ok");
 });
 
+//////////////////////////////////////////////////////////////
+
+app.post("/post", uploadMiddleWare.single("file"), async (req, res) => {
+  // // res.json(req.files);
+  // // console.log(req.file);
+  const { originalname, path } = req.file;
+  // console.log(req.file);
+  const parts = originalname.split(".");
+  const ext = parts[parts.length - 1];
+  const NewExr = path + "." + ext;
+  fs.renameSync(path, NewExr);
+  const { title, summary, content, category } = req.body;
+  // console.log(content);
+
+  await PostModel.create({
+    title,
+    summary,
+    content: content,
+    file: NewExr,
+    category,
+  });
+  res.json({ title, content, summary, category }).status(200);
+
+  // try {
+  //   console.log(req.file);
+  //   if (!req.file) {
+  //     res.send({
+  //       success: false,
+  //       message: "There was no file found in request",
+  //       payload: {},
+  //     });
+  //   } else {
+  //     //Use the name of the input field (i.e. "file") to retrieve the uploaded file
+  //     let file = req.files.file;
+  //     //Use the mv() method to place the file in upload directory (i.e. "uploads")
+  //     file.mv("./uploads/" + file.name);
+  //     //send response
+  //     res.send({
+  //       success: true,
+  //       message: "File was uploaded successfuly",
+  //       payload: {
+  //         name: file.name,
+  //         mimetype: file.mimetype,
+  //         size: file.size,
+  //         path: "/files/uploads/",
+  //         url: "https://my-ftp-server.com/bjYJGFYgjfVGHVb",
+  //       },
+  //     });
+  //   }
+  // } catch (err) {
+  //   res.status(500).send({
+  //     status: false,
+  //     message: "Unexpected problem",
+  //     payload: {},
+  //   });
+  // }
+});
+
 ///////////////////////////////////////////////////////
+
+app.get("/post", async (req, res) => {
+  const data = await PostModel.find();
+  res.json(data).status(200);
+});
+
+///////////////////////////////////////////////////////////
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);

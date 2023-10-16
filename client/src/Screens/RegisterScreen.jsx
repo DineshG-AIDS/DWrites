@@ -1,8 +1,12 @@
 import RegisterForm from "../Components/RegisterForm";
 import NavBar from "../Components/NavBar";
 import { motion as m } from "framer-motion";
+import { useEffect } from "react";
 
 const RegisterScreen = () => {
+  useEffect(() => {
+    document.title = "Dwrite | Register";
+  });
   return (
     <div className="bg-gray-900 min-h-screen">
       <NavBar />

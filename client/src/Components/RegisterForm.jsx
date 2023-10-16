@@ -124,7 +124,11 @@ const RegisterForm = () => {
                   )}
                 </div>
                 <div className="m-5">
-                  <Progress value={10} color="red" />
+                  <Progress
+                    value={passwordOnRegister.length * 10}
+                    color={passwordOnRegister.length > 7 ? "green" : "red"}
+                    // label={passwordOnRegister.length > 1 ? "strong" : ""}
+                  />
                 </div>
                 <div className="flex gap-5 justify-center m-8">
                   <Button

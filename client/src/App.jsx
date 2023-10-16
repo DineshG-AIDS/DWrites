@@ -15,24 +15,23 @@ import BlogScreen from "./Screens/BlogScreen";
 import AboutUsScreen from "./Screens/AboutUsScreen";
 import NotFoundScreen from "./Screens/NotFoundScreen";
 import CreateScreen from "./Screens/CreateScreen";
-// import { useState, useEffect } from "react";
-// import Cookies from "js-cookie";
+import PrivateRoutes from "./Routes/PrivateRoutes";
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // useEffect(() => {
-  //   let token = Cookies.get("token");
-  //   setIsLoggedIn(!!token);
-  // }, []);
   const Router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route index element={<HomeScreens />} />
         <Route path="/login" element={<LOginScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
-        <Route path="/profile" element={<ProfileScreen />} />
-        <Route path="/trend" element={<TrendingScreen />} />
-        <Route path="/blog" element={<BlogScreen />} />
+
+        <Route element={<PrivateRoutes />}>
+          {" "}
+          <Route path="/aboutus" element={<AboutUsScreen />} />
+          <Route path="/profile" element={<ProfileScreen />} />
+          <Route path="/trend" element={<TrendingScreen />} />
+          <Route path="/blog" element={<BlogScreen />} />
+        </Route>
 
         <Route path="/aboutus" element={<AboutUsScreen />} />
         <Route path="/create" element={<CreateScreen />} />
@@ -41,16 +40,6 @@ function App() {
         <Route path="*" element={<NotFoundScreen />} />
 
         {/* ///////////////////////////////////////////////////////////// */}
-
-        {/* <Route element={<PrivateRoutes />}></Route>
-        <Route path="/test" element={<TestScreen />} />
-
-        <Route path="/register" element={<RegisterScreen />} />
-        
-        <Route path="/profile" element={<ProfileScreen />} />
-        <Route path="/create" element={<CreateBlogScreen />} />
-
-        <Route path="/blog" element={<BlogScreen />} /> */}
       </Route>
     )
   );

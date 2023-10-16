@@ -1,8 +1,12 @@
 import LoginForm from "../Components/LoginForm";
 import NavBar from "../Components/NavBar";
 import { motion as m } from "framer-motion";
+import { useEffect } from "react";
 
 const LOginScreen = () => {
+  useEffect(() => {
+    document.title = "Dwrite | Login";
+  });
   return (
     <div className="bg-gray-900 min-h-screen">
       <NavBar />
