@@ -8,6 +8,8 @@ const PostSchema = new Schema(
     file: String,
     category: String,
     content: String,
+    author: String,
+    profile: String,
   },
   { timestamps: true }
 );

@@ -11,22 +11,23 @@ const HeaderText = () => {
     setIsLoggedIn(!!token);
   }, []);
   return (
-    <div className="sm:text-start w-30 sm:w-auto ml-5 sm:ml-20 mt-10 sm:mt-36 text-3xl sm:text-4xl z-30 font-custom6">
+    <div className="sm:text-start w-30 sm:w-auto ml-5 sm:ml-20 mt-10 sm:mt-36 text-3xl sm:text-4xl z-30 font-custom6 no-scrollbar">
       <m.h1
         animate={{ y: 0 }}
         initial={{ y: "100%" }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="text-yellow-600 stroke-white storke-1 sm:text-4xl lg:text-6xl"
+        className="text-yellow-600 stroke-white stroke-1 sm:text-4xl lg:text-5xl"
       >
-        Stay Connected With
+        <span className="mr-2">&quot;</span> Explore the narratives, insights,{" "}
+        <br className="leading-relaxed" /> expertise of writers
       </m.h1>
       <m.h1
         animate={{ y: 0 }}
         initial={{ y: "100%" }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="text-white mt-5 sm:mt-10   text-4xl sm:text-5xl"
+        className="text-white mt-2 sm:mt-2   text-3xl sm:text-4xl"
       >
-        Crunch Media
+        on a wide range of topics <span className="ml-2">&quot;</span>
       </m.h1>
       <m.div
         animate={{ y: 0 }}
@@ -41,7 +42,7 @@ const HeaderText = () => {
               className="text-xl md font-custom1 flex justify-center gap-1  sm:gap-5"
               size="sm"
             >
-              Explore Here
+              Start Reading
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

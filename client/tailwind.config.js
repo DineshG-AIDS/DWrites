@@ -20,8 +20,26 @@ module.exports = withMT({
         custom4: ["custom5", "sans"],
         custom5: ["custom6", "sans"],
         custom6: ["custom7", "sans"],
+        custom7: ["custom8", "sans"],
+        custom8: ["custom9", "sans"],
+        custom9: ["custom10", "sans"],
+        custom10: ["custom11", "sans"],
+        custom11: ["custom12", "sans"],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // function ({ addUtilities }) {
+    //   const newUtilities = {
+    //     ".no-scrollbar::-webkit-scrollbar": {
+    //       display: "none",
+    //     },
+    //     ".no-scrollbar": {
+    //       "-ms-overflow-style": "none",
+    //       "scrollbar-width": "none",
+    //     },
+    //   };
+    //   addUtilities(newUtilities);
+    // },
+  ],
 });

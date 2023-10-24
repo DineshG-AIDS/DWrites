@@ -13,12 +13,14 @@ const LoginForm = () => {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [redirect, SetRedirect] = useState(false);
+  const [IsError, SetIsError] = useState(false);
+
   const Navigate = useNavigate();
 
   const SubmitHAndler = (e) => {
     e.preventDefault();
     const UserData = {
-      email: email,
+      username: email,
       password: password,
     };
     Axois.post("http://localhost:4000/login", UserData, {
@@ -33,8 +35,10 @@ const LoginForm = () => {
           SetRedirect(true);
         }
       })
-      .then((err) => {
-        console.log(err);
+      .catch((err) => {
+        if (err) {
+          SetIsError(true);
+        }
       });
 
     console.log(UserData);
@@ -90,11 +94,11 @@ const LoginForm = () => {
             <div className="flex justify-center">
               <div className="flex-row">
                 <form onSubmit={SubmitHAndler}>
-                  <div className="w-72 sm:w-96 mb-4 sm:mb-6 font-custom">
+                  <div className="w-72 sm:w-96  sm:mb-2 font-custom p-5">
                     <Input
-                      type="email"
+                      type="text"
                       color="black"
-                      label="Your email"
+                      label="Your Username"
                       size="lg"
                       value={email}
                       onChange={(e) => InputHandler("email", e.target.value)}
@@ -102,7 +106,7 @@ const LoginForm = () => {
                   </div>
                   <div></div>
 
-                  <div className="w-72 sm:w-96 font-custom">
+                  <div className="w-72 sm:w-96 font-custom p-5">
                     <Input
                       type="password"
                       value={password}
@@ -112,7 +116,14 @@ const LoginForm = () => {
                       size="lg"
                     />
                   </div>
-                  <div className="flex pt-4 sm:pt-6 gap-6 m-4 sm:m-6">
+                  {IsError && (
+                    <div>
+                      <h1 className="text-xl text-red-600 font-custom">
+                        User Name or Password seems to worng{" "}
+                      </h1>
+                    </div>
+                  )}
+                  <div className="flex pt-4 sm:pt-6 gap-6 m-4 sm:m-6 ">
                     <Link to="/register">
                       <Button
                         color="black"
@@ -141,7 +152,7 @@ const LoginForm = () => {
               <hr className="flex-1 border border-black" />
             </div>
 
-            <div className="w-52   sm:w-72 flex  justify-center pt-4 sm:pt-6 pl-16 sm:pl-32 rounded-full mb-4 sm:mb-5">
+            <div className="w-52   sm:w-72 flex  justify-center pt-4 sm:pt-6 xl:pl-14  rounded-full mb-4 sm:mb-5">
               <GoogleOAuthProvider clientId="976957429910-rd0f8uqns0e19o0h311hm3v2j5nt70st.apps.googleusercontent.com">
                 <GoogleLogin
                   shape="pill"

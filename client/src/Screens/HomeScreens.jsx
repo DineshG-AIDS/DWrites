@@ -11,7 +11,7 @@ const HomeScreens = () => {
     document.title = "Dwrite";
   });
   return (
-    <div className="bg-gray-900 min-h-screen overflow-hidden">
+    <div className="bg-gray-900 min-h-screen  no-scrollbar">
       <NavBar />
       <m.div
         initial={{ y: "100%" }}

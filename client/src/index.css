@@ -31,3 +31,35 @@
   font-family: custom7;
   src: url("./asserts/ff5.ttf");
 }
+
+@font-face {
+  font-family: custom8;
+  src: url("./asserts/AgeoPersonalUse-Bold.otf");
+}
+@font-face {
+  font-family: custom9;
+  src: url("./asserts/AgeoPersonalUse-Light.otf");
+}
+
+@font-face {
+  font-family: custom10;
+  src: url("./asserts/AgeoPersonalUse-Medium.otf");
+}
+@font-face {
+  font-family: custom11;
+  src: url("./asserts/ffg.ttf");
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@font-face {
+  font-family: custom12;
+  src: url("./asserts/watch-quinn.otf");
+}

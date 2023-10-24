@@ -8,7 +8,7 @@ const LOginScreen = () => {
     document.title = "Dwrite | Login";
   });
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="bg-gray-900 min-h-screen no-scrollbar">
       <NavBar />
       <m.div
         initial={{ y: "100%" }}

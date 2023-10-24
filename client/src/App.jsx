@@ -16,6 +16,8 @@ import AboutUsScreen from "./Screens/AboutUsScreen";
 import NotFoundScreen from "./Screens/NotFoundScreen";
 import CreateScreen from "./Screens/CreateScreen";
 import PrivateRoutes from "./Routes/PrivateRoutes";
+import SinglePostScreen from "./Screens/SinglePostScreen";
+import EditScreen from "./Screens/EditScreen";
 
 function App() {
   const Router = createBrowserRouter(
@@ -27,14 +29,15 @@ function App() {
 
         <Route element={<PrivateRoutes />}>
           {" "}
-          <Route path="/aboutus" element={<AboutUsScreen />} />
+          {/* <Route path="/aboutus" element={<AboutUsScreen />} /> */}
           <Route path="/profile" element={<ProfileScreen />} />
-          <Route path="/trend" element={<TrendingScreen />} />
-          <Route path="/blog" element={<BlogScreen />} />
+          <Route path="/create" element={<CreateScreen />} />
+          <Route path="/edit/:id" element={<EditScreen />} />
         </Route>
-
+        <Route path="/trend" element={<TrendingScreen />} />
+        <Route path="/blog" element={<BlogScreen />} />
         <Route path="/aboutus" element={<AboutUsScreen />} />
-        <Route path="/create" element={<CreateScreen />} />
+        <Route path="/post/:id" element={<SinglePostScreen />} />
 
         {/* /////////////////////////////////////////////// */}
         <Route path="*" element={<NotFoundScreen />} />

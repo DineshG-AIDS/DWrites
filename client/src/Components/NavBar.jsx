@@ -101,7 +101,7 @@ const NavBar = () => {
   const smallScreen = window.innerWidth < 960;
 
   return (
-    <Navbar className="mx-auto max-w-screen-3xl  px-4 lg:px-8 lg: py-5 z-10 bg-customcolor1 overflow-hidden">
+    <Navbar className="mx-auto max-w-screen-3xl  px-4 lg:px-8 lg: py-5 z-10 bg-customcolor1 no-scrollbar">
       <div className="container mx-auto flex items-center justify-between text-yellow-600">
         <div className="lg:text-4xl sm:text-xl font-custom">
           <motion.div
@@ -218,15 +218,31 @@ const NavBar = () => {
       <MobileNav open={openNav} className="text-xl">
         <div className="container mx-auto text-xl">
           <div className="flex justify-start"> {navList}</div>
-          <Button
-            variant="gradient"
-            color="yellow"
-            size="md"
-            fullWidth
-            className="mb-2 bg-yellow-600 font-custom1"
-          >
-            <span>Sign Up</span>
-          </Button>
+          {isLoggedIn ? (
+            <Link to="/create">
+              <Button
+                variant="gradient"
+                color="yellow"
+                size="md"
+                fullWidth
+                className="mb-2 bg-yellow-600 font-custom1"
+              >
+                <span>New blog</span>
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <Button
+                variant="gradient"
+                color="yellow"
+                size="md"
+                fullWidth
+                className="mb-2 bg-yellow-600 font-custom1"
+              >
+                <span>Sign Up</span>
+              </Button>
+            </Link>
+          )}
         </div>
       </MobileNav>
     </Navbar>

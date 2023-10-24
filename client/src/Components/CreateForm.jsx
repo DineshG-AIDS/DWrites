@@ -41,8 +41,8 @@ const CreateForm = () => {
 
   const Navigate = useNavigate();
   const quillStyles = {
-    color: "black",
-    backgroundColor: "white",
+    color: "white",
+    backgroundColor: "#212121",
   };
 
   const SubmitHandler = (e) => {
@@ -53,9 +53,9 @@ const CreateForm = () => {
     Data.set("content", content);
     Data.set("category", slected);
     Data.set("file", file[0].file);
-    console.log(content);
+    // console.log(content);
 
-    Axois.post("http://localhost:4000/post", Data)
+    Axois.post("http://localhost:4000/post", Data, { withCredentials: true })
       .then((res) => {
         if (res) {
           SetAnimation(true);
@@ -90,88 +90,110 @@ const CreateForm = () => {
     <div className="bg-gray-900 min-h-screen">
       <NavBar />
 
-      {animation && <Lottie animationData={Confett} width={100} />}
-      <div className="text-center py-10 font-custom text-yellow-600 text-3xl">
-        <h1>Where the creativity begins</h1>
-      </div>
-      <form onSubmit={SubmitHandler}>
-        <div className="flex flex-col w-1/2 gap-4 mx-auto">
-          <input
-            type="text"
-            className="text-xl p-2 rounded-xl font-custom"
-            placeholder="Enter Your Title"
-            value={title}
-            onChange={(e) => InputHandler("title", e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Enter Your Summary"
-            className="text-xl p-2 rounded-xl font-custom"
-            value={summary}
-            onChange={(e) => InputHandler("summary", e.target.value)}
-          />
-          <div className="xl:w-72">
-            <Select
-              label="Select Category"
-              color="amber"
-              className="text-yellow-600 font-custom text-lg"
-              size="lg"
-              onChange={(e) => InputHandler("slected", e)}
-            >
-              <Option
-                className="text-black font-custom text-lg"
-                value="technology"
-              >
-                Technology
-              </Option>
-              <Option className="text-black font-custom text-lg" value="earth">
-                Earth
-              </Option>
-              <Option
-                className="text-black font-custom text-lg"
-                value="front-end"
-              >
-                Front-End
-              </Option>
-              <Option
-                className="text-black font-custom text-lg"
-                value="back-end"
-              >
-                Back-End
-              </Option>
-              <Option className="text-black font-custom text-lg" value="others">
-                {" "}
-                Others
-              </Option>
-            </Select>
+      {animation ? (
+        <Lottie animationData={Confett} width={100} />
+      ) : (
+        <>
+          <div className="text-center py-10 font-custom text-yellow-600 text-3xl">
+            <h1>Where the creativity begins</h1>
           </div>
-          <div className="w-full sm:w-1/2 md:w-1/10 lg:w-10/12 xl:w-full flex justify-center mx-auto">
-            <Dropzone onChange={updateFiles} value={files}>
-              {files.map((file) => (
-                <FileItem {...file} onSee={handleSee} preview />
-              ))}
-            </Dropzone>
-          </div>
+          <form onSubmit={SubmitHandler}>
+            <div className="flex flex-col w-1/2 gap-4 mx-auto">
+              <input
+                type="text"
+                className="text-xl p-2 rounded-xl font-custom"
+                placeholder="Enter Your Title"
+                value={title}
+                onChange={(e) => InputHandler("title", e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Enter Your Summary"
+                className="text-xl p-2 rounded-xl font-custom"
+                value={summary}
+                onChange={(e) => InputHandler("summary", e.target.value)}
+              />
+              <div className="xl:w-72">
+                <Select
+                  label="Select Category"
+                  color="amber"
+                  className="text-yellow-600 font-custom text-lg"
+                  size="lg"
+                  onChange={(e) => InputHandler("slected", e)}
+                >
+                  <Option
+                    className="text-black font-custom text-lg"
+                    value="technology"
+                  >
+                    Technology
+                  </Option>
+                  <Option
+                    className="text-black font-custom text-lg"
+                    value="earth"
+                  >
+                    Earth
+                  </Option>
+                  <Option
+                    className="text-black font-custom text-lg"
+                    value="front-end"
+                  >
+                    Front-End
+                  </Option>
+                  <Option
+                    className="text-black font-custom text-lg"
+                    value="back-end"
+                  >
+                    Back-End
+                  </Option>
+                  <Option
+                    className="text-black font-custom text-lg"
+                    value="others"
+                  >
+                    {" "}
+                    Others
+                  </Option>
+                </Select>
+              </div>
+              <div className="w-full sm:w-1/2 md:w-1/10 lg:w-10/12 xl:w-full flex justify-center mx-auto text-xl text-yellow-600">
+                <Dropzone
+                  onChange={updateFiles}
+                  value={files}
+                  maxFiles={1}
+                  className="font-custom text-yellow"
+                >
+                  {files.map((file) => (
+                    <FileItem {...file} onSee={handleSee} preview />
+                  ))}
+                </Dropzone>
+              </div>
 
-          {/* <input
+              {/* <input
             type="file"
             onChange={(e) => SetFile(e.target.files)}
             className="text-xl p-2 rounded-xl font-custom text-white"
           /> */}
-          <ReactQuill
-            theme="snow"
-            style={quillStyles}
-            value={content}
-            className="text"
-            onChange={(e) => InputHandler("content", e)}
-          />
-          <div className="flex justify-center">
-            <Button color="yellow" className="w-72 rounded-2xl" type="submit">
-              Submit
-            </Button>
-          </div>
-        </div>
-      </form>
+              <div>
+                <ReactQuill
+                  theme="snow"
+                  style={quillStyles}
+                  value={content}
+                  className="text-white"
+                  onChange={(e) => InputHandler("content", e)}
+                />
+              </div>
+              <div className="flex justify-center">
+                <Button
+                  color="yellow"
+                  className="w-72 rounded-2xl"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </form>
+        </>
+      )}
     </div>
   );
 };

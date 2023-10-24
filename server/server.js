@@ -20,6 +20,9 @@ const fs = require("fs");
 const app = express();
 ////////////////////////////
 
+app.use("/uploads", express.static(__dirname + "/uploads"));
+////////////////////////////
+
 require("dotenv").config();
 //////////////////////////////////
 const uploadMiddleWare = multer({ dest: "uploads/" });
@@ -52,7 +55,7 @@ app.get("/", (req, res) => {
 app.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
-  const existingUser = await UserModel.findOne({ email });
+  const existingUser = await UserModel.findOne({ username });
 
   if (existingUser) {
     return res
@@ -103,8 +106,9 @@ app.post("/reg-gog", async (req, res) => {
 
 let SuperKey = "superKeyBuddy";
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await UserModel.findOne({ email });
+  const { username, password } = req.body;
+  const user = await UserModel.findOne({ username });
+  console.log(!user);
   if (!user) {
     return res.status(401).json("User not found");
   }
@@ -112,7 +116,7 @@ app.post("/login", async (req, res) => {
 
   try {
     if (PasswordMatch) {
-      buddy_jwt.sign({ email, id: user.id }, SuperKey, {}, (err, token) => {
+      buddy_jwt.sign({ username, id: user.id }, SuperKey, {}, (err, token) => {
         if (err) {
           console.error("Error during token signing:", err);
           return res.status(500).json("Internal server error");
@@ -183,69 +187,100 @@ app.post("/logout", (req, res) => {
 //////////////////////////////////////////////////////////////
 
 app.post("/post", uploadMiddleWare.single("file"), async (req, res) => {
-  // // res.json(req.files);
-  // // console.log(req.file);
   const { originalname, path } = req.file;
-  // console.log(req.file);
+
   const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
   const NewExr = path + "." + ext;
   fs.renameSync(path, NewExr);
   const { title, summary, content, category } = req.body;
-  // console.log(content);
+  const { token } = req.cookies;
 
-  await PostModel.create({
-    title,
-    summary,
-    content: content,
-    file: NewExr,
-    category,
+  buddy_jwt.verify(token, SuperKey1, {}, async (err, info) => {
+    if (err) throw err;
+    console.log(info);
+    const POstDoc = await PostModel.create({
+      title,
+      summary,
+      content: content,
+      file: NewExr,
+      category,
+      author: info.username,
+      profile: info?.profile,
+      id: info?.id,
+    });
+    // console.log(info.id);
+    res.json(POstDoc).status(200);
+    console.log(info.id);
   });
-  res.json({ title, content, summary, category }).status(200);
-
-  // try {
-  //   console.log(req.file);
-  //   if (!req.file) {
-  //     res.send({
-  //       success: false,
-  //       message: "There was no file found in request",
-  //       payload: {},
-  //     });
-  //   } else {
-  //     //Use the name of the input field (i.e. "file") to retrieve the uploaded file
-  //     let file = req.files.file;
-  //     //Use the mv() method to place the file in upload directory (i.e. "uploads")
-  //     file.mv("./uploads/" + file.name);
-  //     //send response
-  //     res.send({
-  //       success: true,
-  //       message: "File was uploaded successfuly",
-  //       payload: {
-  //         name: file.name,
-  //         mimetype: file.mimetype,
-  //         size: file.size,
-  //         path: "/files/uploads/",
-  //         url: "https://my-ftp-server.com/bjYJGFYgjfVGHVb",
-  //       },
-  //     });
-  //   }
-  // } catch (err) {
-  //   res.status(500).send({
-  //     status: false,
-  //     message: "Unexpected problem",
-  //     payload: {},
-  //   });
-  // }
 });
 
 ///////////////////////////////////////////////////////
 
 app.get("/post", async (req, res) => {
-  const data = await PostModel.find();
-  res.json(data).status(200);
+  const ITEM_PER_PAGE = 10;
+  const page = req.query.page || 1;
+  const query = {};
+
+  const Count = await PostModel.estimatedDocumentCount(query);
+
+  const posts = await PostModel.find(query).sort({ createdAt: -1 });
+  const PageCount = Math.ceil(Count / ITEM_PER_PAGE);
+
+  // const userData = await UserGoogleModel.findById("author1");
+  res.json({
+    pagination: {
+      Count,
+      PageCount,
+    },
+    posts,
+  });
+});
+///////////////////////////////////////////////////////////
+
+app.get("/post/:id", (req, res) => {
+  const id = req.params.id;
+  PostModel.findOne({ _id: id })
+    .then((data) => res.json(data).status(200))
+    .catch((error) => console.log(error));
 });
 
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+app.put("/post", uploadMiddleWare.single("file"), async (req, res) => {
+  let NewExr; // Declare NewExr outside the if block.
+
+  if (req.file) {
+    const { originalname, path } = req.file;
+
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    NewExr = path + "." + ext; // Assign NewExr a value if req.file exists.
+    fs.renameSync(path, NewExr);
+  }
+
+  const { title, summary, content, category, id } = req.body;
+
+  const PostData = await PostModel.findById(id);
+
+  const Id = JSON.stringify(PostData._id);
+  const id1 = JSON.stringify(id);
+
+  const areEqual = Id === id1;
+  if (areEqual) {
+    await PostData.updateOne({
+      title,
+      summary,
+      content,
+      category,
+      file: NewExr ? NewExr : PostData.file,
+    });
+    res.json(PostData).status(200);
+  } else {
+    res.json("Something went wrong buddy").status(400);
+  }
+});
+
+////////////////////////////////////////////////////
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);

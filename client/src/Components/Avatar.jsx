@@ -133,7 +133,7 @@ const AvatarC = () => {
         </MenuItem>
 
         <hr className="my-2 border-black" />
-        <MenuItem className="flex items-center gap-2 ">
+        <MenuItem className="flex items-center gap-2 z-10 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
