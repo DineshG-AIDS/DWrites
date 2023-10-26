@@ -76,17 +76,17 @@ const RegisterForm = () => {
       {redirect}
       <div className="flex justify-center">
         <div className="bg-yellow-600 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 m-5 mt-12 rounded-2xl overflow-hidden">
-          <div className="w-32 mx-auto m-4 bg-white rounded-full p-5">
+          <div className="w-28 mx-auto m-4 bg-white rounded-full p-5">
             <img src={Img} alt="" />
           </div>
-          <div className="text-center text-black text-xl pl-4 pt-8 pb-10 font-custom1 cursor-default">
+          <div className="text-center text-black text-xl pl-4 pt-2 pb-10 font-custom1 cursor-default">
             <h1>Create your account🚀</h1>
           </div>
           <div className="flex justify-center">
-            <div className="flex-row p-4">
+            <div className="flex-row ">
               {" "}
               <form onSubmit={submitHandler}>
-                <div className="w-full sm:w-96 mb-5 font-custom">
+                <div className="w-full sm:w-96  font-custom p-4">
                   <Input
                     type="text"
                     color="black"
@@ -96,7 +96,7 @@ const RegisterForm = () => {
                     onChange={(e) => inputHandler("username", e.target.value)}
                   />
                 </div>
-                <div className="w-full sm:w-96 mb-5 font-custom">
+                <div className="w-full sm:w-96  font-custom p-4">
                   <Input
                     type="email"
                     color="black"
@@ -106,7 +106,7 @@ const RegisterForm = () => {
                     onChange={(e) => inputHandler("email", e.target.value)}
                   />
                 </div>
-                <div className="w-full sm:w-96 font-custom">
+                <div className="w-full sm:w-96 font-custom p-4">
                   <Input
                     type="password"
                     color="black"
