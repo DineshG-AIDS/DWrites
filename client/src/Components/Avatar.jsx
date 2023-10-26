@@ -11,10 +11,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Axois from "axios";
 import Cookies from "js-cookie";
+import Img1 from "../Asserts/Logo12.png";
 
 const AvatarC = () => {
   const [ProfileImg, SetProfileIMg] = useState(Img);
   const [GogleUser, SetGoogleUser] = useState(false);
+  const [userName, SetUserName] = useState("");
   const navigate = useNavigate();
   const LogOutHandler = () => {
     // Check if the "token" cookie exists
@@ -33,8 +35,10 @@ const AvatarC = () => {
       .then((res) => {
         let Data = res.data;
         let DecodeData = JSON.parse(Data);
+        console.log(DecodeData);
         if (res) {
           SetProfileIMg(DecodeData.profile);
+          SetUserName(DecodeData.username);
         }
         SetGoogleUser(!!DecodeData.profile);
         // console.log(!!DecodeData.profile);
@@ -63,8 +67,8 @@ const AvatarC = () => {
         )}
       </MenuHandler>
       <MenuList className="bg-yellow-600">
-        <MenuItem className="flex items-center gap-2">
-          <svg
+        <MenuItem className="flex items-center gap-4">
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -77,15 +81,30 @@ const AvatarC = () => {
               strokeLinejoin="round"
               d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
             />
-          </svg>
-          <Link to="/profile">
-            <Typography
-              variant="large"
-              className="font-normal font-custom5 text-black"
-            >
-              My Profile
-            </Typography>
-          </Link>
+          </svg> */}
+          {GogleUser ? (
+            <Avatar
+              variant="circular"
+              alt="tania andrew"
+              className="cursor-pointe border-black border-2 h-18  w-8 "
+              src={ProfileImg}
+            />
+          ) : (
+            <Avatar
+              variant="circular"
+              alt="tania andrew"
+              className="cursor-pointe border-black border-2   h-18  w-10 "
+              src={Img1}
+            />
+          )}
+          {/* <Link to=""> */}
+          <Typography
+            variant="large"
+            className="font-normal font-custom5 text-black text-lg cursor-default lowercase"
+          >
+            {userName}
+          </Typography>
+          {/* </Link> */}
         </MenuItem>
         <MenuItem className="flex items-center gap-2 ">
           {/* <svg

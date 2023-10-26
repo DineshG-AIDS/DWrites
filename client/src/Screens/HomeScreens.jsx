@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 const HomeScreens = () => {
   useEffect(() => {
-    document.title = "Dwrite";
+    document.title = "Dwrite | Home ";
   });
   return (
     <div className="bg-gray-900 min-h-screen  no-scrollbar">

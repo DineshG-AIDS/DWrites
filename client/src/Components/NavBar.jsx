@@ -37,6 +37,7 @@ const NavBar = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ type: "spring", bounce: 0.1, duration: 0.75 }}
+          className="no-scrollbar"
         >
           <Link
             to="/"
@@ -50,7 +51,7 @@ const NavBar = () => {
           </Link>
         </motion.li>
       </div>
-      <div>
+      {/* <div>
         <motion.li
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -64,10 +65,10 @@ const NavBar = () => {
                 : "text-xl hover:bg-yellow-600 p-2 rounded-full"
             }
           >
-            Trendings
+            categories
           </Link>
         </motion.li>
-      </div>
+      </div> */}
       <div>
         <li>
           <Link
@@ -78,7 +79,7 @@ const NavBar = () => {
                 : "text-xl hover:bg-yellow-600 p-2 rounded-full"
             }
           >
-            Blogs
+            Blog
           </Link>
         </li>
       </div>
@@ -102,7 +103,7 @@ const NavBar = () => {
 
   return (
     <Navbar className="mx-auto max-w-screen-3xl  px-4 lg:px-8 lg: py-5 z-10 bg-customcolor1 no-scrollbar">
-      <div className="container mx-auto flex items-center justify-between text-yellow-600">
+      <div className="container mx-auto flex items-center justify-between text-yellow-600 no-scrollbar">
         <div className="lg:text-4xl sm:text-xl font-custom">
           <motion.div
             variants={{
@@ -112,6 +113,7 @@ const NavBar = () => {
             initial="hidden"
             animate="visible"
             transition={{ duration: 1, delay: 0.25, ease: "easeOut" }}
+            className="no-scrollbar"
           >
             <Link to="/">
               <span className="text-5xl text-white">D</span> writes
@@ -179,7 +181,7 @@ const NavBar = () => {
 
         <IconButton
           variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden no-scrollbar"
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >

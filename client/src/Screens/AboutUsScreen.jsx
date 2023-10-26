@@ -1,5 +1,7 @@
 import NavBar from "../Components/NavBar";
 import { useEffect } from "react";
+import Carosel from "../Components/Carosel";
+import CardAbout from "../Components/CardAbout";
 
 const AboutUsScreen = () => {
   useEffect(() => {
@@ -9,7 +11,11 @@ const AboutUsScreen = () => {
     <>
       <div className="bg-gray-900 min-h-screen overflow-hidden">
         <NavBar />
-        <h1>Profile screen</h1>
+        <div className="font-custom text-center py-20">
+          {/* <h1>Who am I ?</h1> */}
+          <Carosel />
+          <CardAbout />
+        </div>
       </div>
     </>
   );

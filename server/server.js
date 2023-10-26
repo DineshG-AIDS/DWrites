@@ -212,7 +212,7 @@ app.post("/post", uploadMiddleWare.single("file"), async (req, res) => {
     // console.log(info.id);
     res.json(POstDoc).status(200);
     console.log(info.id);
-  });
+  }); 
 });
 
 ///////////////////////////////////////////////////////

@@ -1,4 +1,3 @@
-// import  from "react";
 import {
   Card,
   CardHeader,
@@ -16,6 +15,7 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import Img from "../Asserts/Logo22.png";
 import { Link } from "react-router-dom";
+
 
 const CardBlog = ({
   title,
@@ -160,6 +160,7 @@ const CardBlog = ({
               <Link to="/trend">
                 <Chip
                   value={"#  " + category}
+                  className="rounded-full"
                   color="black"
                   size="sm"
                   variant="outlined"

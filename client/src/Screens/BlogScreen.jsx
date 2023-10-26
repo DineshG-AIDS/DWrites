@@ -10,7 +10,7 @@ import Lottie from "lottie-react";
 import LoadingAnimation1 from "../Asserts/loading4.json";
 import NotFound from "../Asserts/Not-found.json";
 import Error from "../Asserts/networkErr.json";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 const BlogScreen = () => {
   const [userName, setUserName] = useState("");
   const [dataFromDb, SetDataFromDb] = useState({});
@@ -54,9 +54,7 @@ const BlogScreen = () => {
         }
       })
       .catch((err) => {
-        // if (err) {
-        //   SetIsError(true);
-        // }
+        console.log(err);
       });
   }, []);
   console.log(dataFromDb);
@@ -118,7 +116,7 @@ const BlogScreen = () => {
             animate={{ y: "0%" }}
             exit={{ opacity: 1 }}
             transition={{ duration: 0.75, ease: "easeOut" }}
-            className="flex flex-wrap justify-center gap-5 p-4 lg:gap-10 lg:p-10 overflow-x-hidden"
+            className="flex flex-wrap justify-center gap-5 p-4 lg:gap-10 lg:p-10 overflow-x-hidden no-scrollbar"
           >
             {!isLoggedIn && <Alerts />}
             <m.div
@@ -126,7 +124,7 @@ const BlogScreen = () => {
               animate={{ y: "0%" }}
               exit={{ opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-y-20 sm:gap-x-0 md:gap-x-20 lg:gap-x-20 "
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-y-20 sm:gap-x-0 md:gap-x-20 lg:gap-x-20 no-scrollbar "
             >
               {" "}
               {dataFromDb.length > 0 ? (

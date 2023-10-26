@@ -6,9 +6,11 @@ import Cookies from "js-cookie";
 import Alerts from "../Components/Alert";
 import { motion as m } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Avatar, useTabs } from "@material-tailwind/react";
+import { Avatar } from "@material-tailwind/react";
 import Img from "../Asserts/Logo12.png";
 import { Spinner, Tooltip } from "@material-tailwind/react";
+import ShareBtn from "../Components/ShareBtn";
+import { useLocation } from "react-router-dom";
 
 const SinglePostScreen = () => {
   const [userData, SetUserData] = useState({});
@@ -81,6 +83,7 @@ const SinglePostScreen = () => {
   setTimeout(() => {
     SetTimer(true);
   }, 1200);
+  const location = useLocation();
   return (
     <>
       <div className="h-screen bg-gray-900">
@@ -97,7 +100,7 @@ const SinglePostScreen = () => {
           ""
         )}
         <div className="mt-10 pl-4">
-          <Link to="/blog">
+          <Link to={location.pathname === "/blog" ? "/blog" : "/blog"}>
             <Tooltip
               content="Go Back"
               animate={{
@@ -234,6 +237,7 @@ const SinglePostScreen = () => {
                       <h1>{userData.category}</h1>
                     </m.div>
                   </Link>
+                  <ShareBtn />
                 </div>
               </m.div>
             )}
