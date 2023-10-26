@@ -7,7 +7,7 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import LOginScreen from "./Screens/LOginScreen";
+import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import TrendingScreen from "./Screens/TrendingScreen";
@@ -24,7 +24,7 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route index element={<HomeScreens />} />
-        <Route path="/login" element={<LOginScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
 
         <Route element={<PrivateRoutes />}>
