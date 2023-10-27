@@ -260,7 +260,7 @@ const SinglePostScreen = () => {
             )}
 
             {/* <hr className="" /> */}
-            <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-custom leading-relaxed text-white p-4 sm:p-8 md:p-16 lg:p-24 xl:p-32 bg-gray-900">
+            <div className="text-base sm:text-md md:text-xl lg:text-xl xl:text-2xl font-custom leading-relaxed text-white p-4 sm:p-8 md:p-16 lg:p-24 xl:p-32 bg-gray-900">
               <div
                 dangerouslySetInnerHTML={{
                   __html: userData.content

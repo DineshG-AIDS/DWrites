@@ -6,8 +6,6 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import Confetti from "../Asserts/confetti.json";
-// import Lottie from "lottie-react";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");

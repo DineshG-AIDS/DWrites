@@ -12,7 +12,6 @@ const AboutUsScreen = () => {
       <div className="bg-gray-900 min-h-screen overflow-hidden">
         <NavBar />
         <div className="font-custom text-center py-20">
-          {/* <h1>Who am I ?</h1> */}
           <Carosel />
           <CardAbout />
         </div>

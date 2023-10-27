@@ -100,7 +100,7 @@ const BlogScreen = () => {
             transition={{ duration: 0.75, ease: "easeOut" }}
             className="pt-10 pl-20"
           >
-            <h1 className="text-white xl:text-4xl font-custom">
+            <h1 className="text-white xl:text-4xl font-custom p-2">
               {isLoggedIn && (
                 <>
                   Welcome Back{" "}
@@ -132,7 +132,7 @@ const BlogScreen = () => {
                   <>
                     {" "}
                     <m.div
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                       {" "}

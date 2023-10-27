@@ -51,7 +51,7 @@ const ShareBtn = () => {
       <Dialog
         open={open}
         handler={handleOpen}
-        className="bg-gray-900"
+        className="bg-gray-900 w-full"
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0.9, y: -100 },
@@ -124,7 +124,7 @@ const ShareBtn = () => {
                 />
               </EmailShareButton>
             </m.div>
-            <m.div
+            {/* <m.div
               whileHover={{ scale: 1.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
@@ -139,7 +139,7 @@ const ShareBtn = () => {
                   className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16"
                 />
               </TelegramShareButton>
-            </m.div>
+            </m.div> */}
           </div>
         </DialogBody>
         <DialogFooter>

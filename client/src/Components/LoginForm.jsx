@@ -118,7 +118,7 @@ const LoginForm = () => {
                   </div>
                   {IsError && (
                     <div>
-                      <h1 className="text-xl text-red-600 font-custom">
+                      <h1 className="text-lg pl-4 text-red-600 font-custom">
                         User Name or Password seems to worng{" "}
                       </h1>
                     </div>
